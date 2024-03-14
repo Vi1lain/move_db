@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:move_db/Theme/app_buttom_style.dart';
 
 class AuthWidget extends StatefulWidget {
   AuthWidget({super.key});
@@ -30,30 +31,38 @@ class _HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = const TextStyle(fontSize: 16, color: Colors.black);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(height: 25),
           Text(
-              style: textStyle,
+              style: AppButtomStyle.textStyleBlack,
               textAlign: TextAlign.justify,
               'bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-'
               'bla-bla-bla-bla-bla-bla-bla-bla-bla-'
               'bla-bla-bla-bla-bla-bla-bla-bla-bla-'
               'bla-bla-bla-bla-bla-bla-bla-bla-bla-'
-              'bla-bla-bla-bla-bla-bla-bla-bla-bla-'
+              'bla-bla-bla-bla-bla-bla-bla-bla-bla- '
               'bla-bla-bla-bla-bla-bla-bla-bla-bla-'
               'bla-bla-bla-bla-bla-bla-bla-bla-'),
+          TextButton(
+              onPressed: () {},
+              child:
+                  Text(style: AppButtomStyle.textStyleLightBlue, "Register")),
           Text(
-              style: textStyle,
+              style: AppButtomStyle.textStyleBlack,
               'bla-bla-bla-bla-bla-bla-bla-bla-'
               'bla-bla-bla-bla-bla-bla-bla-bla-'
               'bla-bla-bla-bla-bla-bla-bla-bla-'),
+          TextButton(
+              onPressed: () {},
+              child: Text(
+                  style: AppButtomStyle.textStyleLightBlue, "Verify email")),
           const SizedBox(height: 25),
-          const _FormWidget(),
+          _FormWidget(),
         ],
       ),
     );
@@ -61,16 +70,35 @@ class _HeaderWidget extends StatelessWidget {
 }
 
 class _FormWidget extends StatefulWidget {
-  const _FormWidget({super.key});
+  _FormWidget({super.key});
 
   @override
   State<_FormWidget> createState() => _FormWidgetState();
 }
 
 class _FormWidgetState extends State<_FormWidget> {
+  final _loginTextController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String? errorText = null;
+  _auth() {
+
+    String _loginText = _loginTextController.text;
+    String _resetPassword = _passwordController.text;
+    if (_loginText == "admin" && _resetPassword == "admin") {
+      errorText="open App";
+    } else {
+      errorText= "error";
+    }
+    setState(() {});
+  }
+
+  _restPassword() {
+    print("reset password!");
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = const TextStyle(fontSize: 16, color: Colors.black);
+
 
     InputDecoration textFieldDecorator = const InputDecoration(
         fillColor: Colors.red,
@@ -81,32 +109,39 @@ class _FormWidgetState extends State<_FormWidget> {
         isCollapsed: true,
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         border: OutlineInputBorder());
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(style: textStyle, "Username"),
+        Text(style: AppButtomStyle.textStyleBlack, "Username"),
         const SizedBox(height: 5),
         TextField(
+          controller: _loginTextController,
           decoration: textFieldDecorator,
         ),
         const SizedBox(height: 15),
-        Text(style: textStyle, "Password"),
+        Text(style: AppButtomStyle.textStyleBlack, "Password"),
         const SizedBox(height: 5),
         TextField(
+          controller: _passwordController,
           decoration: textFieldDecorator,
         ),
+
+     Text.rich( errorText!=null?TextSpan(style:TextStyle(color: Colors.red,fontSize: 16),text: errorText):TextSpan(text:"")),
         const SizedBox(height: 15),
         Row(
           children: [
             FilledButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)))),
-                onPressed: () {},
+                style: AppButtomStyle.linkButtomFilled,
+                onPressed: _auth,
                 child: Text("Login")),
-            const SizedBox(width: 15),
-            OutlinedButton(onPressed: () {}, child: Text("Reset password")),
+            const SizedBox(width: 25),
+            OutlinedButton(
+                style: AppButtomStyle.linkButtomOutlined,
+                onPressed: _restPassword,
+                child: Text(
+                    style: AppButtomStyle.textStyleLightBlue,
+                    "Reset password")),
           ],
         )
       ],
