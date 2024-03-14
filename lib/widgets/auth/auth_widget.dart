@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:move_db/Theme/app_buttom_style.dart';
+
+import '../main_screen/main_screen_widget.dart';
 
 class AuthWidget extends StatefulWidget {
   AuthWidget({super.key});
@@ -82,10 +84,15 @@ class _FormWidgetState extends State<_FormWidget> {
   String? errorText = null;
   _auth() {
 
-    String _loginText = _loginTextController.text;
-    String _resetPassword = _passwordController.text;
+    //String _loginText = _loginTextController.text;
+    //String _resetPassword = _passwordController.text;
+    String _loginText = "admin";
+    String _resetPassword = "admin";
     if (_loginText == "admin" && _resetPassword == "admin") {
-      errorText="open App";
+
+      //Navigator.pushNamed(context,'/main_screen');
+      Navigator.pushReplacementNamed(context,'/main_screen');
+
     } else {
       errorText= "error";
     }
