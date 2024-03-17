@@ -14,16 +14,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(appBarTheme: AppBarTheme(backgroundColor:Colors.deepPurple),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurple),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.deepPurple,
+            unselectedItemColor: Colors.grey,
+            selectedItemColor: Colors.white),
         useMaterial3: true,
       ),
-      initialRoute: '/main_screen',
-      routes:{
-        '/':(context)=> AuthWidget(),
-        '/main_screen':(context)=> MainScreenWidget(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => AuthWidget(),
+        '/main_screen': (context) => MainScreenWidget(),
       },
     );
   }
 }
-

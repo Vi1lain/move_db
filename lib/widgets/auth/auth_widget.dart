@@ -79,15 +79,14 @@ class _FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<_FormWidget> {
-  final _loginTextController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _loginTextController = TextEditingController(text: "admin");
+  final _passwordController = TextEditingController(text: "admin");
   String? errorText = null;
   _auth() {
 
-    //String _loginText = _loginTextController.text;
-    //String _resetPassword = _passwordController.text;
-    String _loginText = "admin";
-    String _resetPassword = "admin";
+    String _loginText = _loginTextController.text;
+    String _resetPassword = _passwordController.text;
+
     if (_loginText == "admin" && _resetPassword == "admin") {
 
       //Navigator.pushNamed(context,'/main_screen');
@@ -129,7 +128,8 @@ class _FormWidgetState extends State<_FormWidget> {
         const SizedBox(height: 15),
         Text(style: AppButtomStyle.textStyleBlack, "Password"),
         const SizedBox(height: 5),
-        TextField(
+        TextField(obscureText: true,
+          obscuringCharacter:"*",
           controller: _passwordController,
           decoration: textFieldDecorator,
         ),
