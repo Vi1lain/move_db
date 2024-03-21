@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../movie_list/movie_list_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
-  const MainScreenWidget({super.key});
+   MainScreenWidget({super.key});
 
   @override
   State<MainScreenWidget> createState() => _MainScreenWidgetState();
@@ -11,19 +11,9 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Новости',
-      style: optionStyle,
-    ),
-    MovieListWidget(),
-    Text(
-      'Сериалы',
-      style: optionStyle,
-    ),
-  ];
+  static  TextStyle optionStyle =
+  const TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
 
   onSelectTab(index){
     if(_selectedTab == index) return;
@@ -35,7 +25,17 @@ setState(() {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: _widgetOptions[_selectedTab],),
+    return Scaffold(body: IndexedStack(index: _selectedTab,children: [
+      Text(
+        'Новости',
+        style: optionStyle,
+      ),
+      MovieListWidget(),
+      Text(
+        'Сериалы',
+        style: optionStyle,
+      ),
+    ],),
       bottomNavigationBar: BottomNavigationBar(
         onTap: onSelectTab,
         currentIndex: _selectedTab,items: [
